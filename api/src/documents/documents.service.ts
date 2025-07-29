@@ -1,5 +1,4 @@
-// src/documents/documents.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Document, DocumentStatus } from './entities/document.entity';
@@ -17,8 +16,8 @@ export class DocumentsService {
 
     const query = this.documentRepository
       .createQueryBuilder('document')
-      .leftJoinAndSelect('document.employee', 'employee') // Carrega os dados do colaborador
-      .leftJoinAndSelect('document.documentType', 'documentType') // Carrega os dados do tipo de documento
+      .leftJoinAndSelect('document.employee', 'employee') 
+      .leftJoinAndSelect('document.documentType', 'documentType') 
       .where('document.status = :status', { status: DocumentStatus.PENDING });
 
     // Adiciona filtros se eles forem fornecidos
@@ -50,10 +49,10 @@ export class DocumentsService {
       throw new NotFoundException(`Document with ID "${id}" not found`);
     }
 
-    // Opcional: Adicionar lógica para não submeter um documento que não está pendente
-    // if (document.status !== DocumentStatus.PENDING) {
-    //   throw new ConflictException(`Document is not pending.`);
-    // }
+    // Opcional: lógica para não submeter um documento que não está pendente
+    if (document.status !== DocumentStatus.PENDING) {
+      throw new ConflictException(`Document is not pending.`);
+    }
 
     document.status = DocumentStatus.SUBMITTED;
     return this.documentRepository.save(document);

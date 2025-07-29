@@ -1,4 +1,3 @@
-// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -24,7 +23,7 @@ import { DocumentsModule } from './documents/documents.module';
         username: configService.get<string>('DB_USERNAME', 'root'),
         password: configService.get<string>('DB_PASSWORD', ''),
         database: configService.get<string>('DB_DATABASE', 'inmeta_docs_db'),
-        entities: [Employee, DocumentType, Document], // <-- Adicione as novas entidades aqui
+        entities: [Employee, DocumentType, Document],
         synchronize: false,
       }),
     }),

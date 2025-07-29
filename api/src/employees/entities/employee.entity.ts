@@ -1,4 +1,3 @@
-// src/employees/entities/employee.entity.ts
 import { Document } from '../../documents/entities/document.entity';
 import {
   Column,
@@ -23,8 +22,6 @@ export class Employee {
   @Column({ type: 'date' })
   hiredAt: Date;
 
-  // Relação: Um Employee pode ter muitos 'Documents'.
-  // Esta é a linha que estava faltando.
   @OneToMany(() => Document, (document) => document.employee)
   documents: Document[];
 

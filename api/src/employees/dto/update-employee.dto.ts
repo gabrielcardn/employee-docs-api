@@ -1,4 +1,3 @@
-// src/employees/dto/update-employee.dto.ts
 import { IsString, Length, IsDateString, IsOptional } from 'class-validator';
 
 export class UpdateEmployeeDto {

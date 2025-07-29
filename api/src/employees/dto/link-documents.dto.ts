@@ -1,4 +1,3 @@
-// src/employees/dto/link-documents.dto.ts
 import { IsArray, ArrayNotEmpty, IsUUID } from 'class-validator';
 
 export class LinkDocumentsDto {

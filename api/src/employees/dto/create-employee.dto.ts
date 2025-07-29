@@ -1,4 +1,3 @@
-// src/employees/dto/create-employee.dto.ts
 import { IsString, IsNotEmpty, Length, IsDateString } from 'class-validator';
 
 export class CreateEmployeeDto {

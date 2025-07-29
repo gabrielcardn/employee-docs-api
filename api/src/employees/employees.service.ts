@@ -1,11 +1,10 @@
-// src/employees/employees.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee } from './entities/employee.entity';
-import { Document } from '../documents/entities/document.entity'; // <-- Importe a entidade Document
+import { Document } from '../documents/entities/document.entity'; 
 import { LinkDocumentsDto } from './dto/link-documents.dto';
 
 @Injectable()
@@ -14,7 +13,6 @@ export class EmployeesService {
     @InjectRepository(Employee)
     private readonly employeeRepository: Repository<Employee>,
 
-    // Precisamos do repositório de Document também
     @InjectRepository(Document)
     private readonly documentRepository: Repository<Document>,
   ) {}
@@ -37,8 +35,6 @@ export class EmployeesService {
   }
 
   async update(id: string, updateEmployeeDto: UpdateEmployeeDto): Promise<Employee> {
-    // O preload primeiro busca o funcionário pelo ID e depois mescla os novos dados nele.
-    // Isso garante que estamos atualizando uma entidade que existe.
     const employee = await this.employeeRepository.preload({
       id: id,
       ...updateEmployeeDto,
@@ -59,7 +55,7 @@ export class EmployeesService {
 
     async linkDocuments(employeeId: string, linkDocumentsDto: LinkDocumentsDto): Promise<void> {
     // 1. Verifica se o colaborador existe
-    const employee = await this.findOne(employeeId); // Reutilizamos o método que já tínhamos
+    const employee = await this.findOne(employeeId); 
 
     const { documentTypeIds } = linkDocumentsDto;
 
@@ -68,7 +64,6 @@ export class EmployeesService {
       return this.documentRepository.create({
         employee: employee, // Associa ao colaborador encontrado
         documentType: { id: typeId }, // Associa ao tipo de documento pelo ID
-        // O status 'PENDING' já é o padrão definido na entidade, então não precisamos especificar
       });
     });
 

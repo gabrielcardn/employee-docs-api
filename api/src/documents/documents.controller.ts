@@ -1,4 +1,3 @@
-// src/documents/documents.controller.ts
 import {
   Controller,
   Param,
@@ -7,8 +6,8 @@ import {
   Patch,
   HttpCode,
   HttpStatus,
-  Get, // Adicione o Get
-  Query, // Adicione o Query
+  Get, 
+  Query, 
 } from '@nestjs/common';
 import { DocumentsService } from './documents.service';
 import { FindPendingDocumentsDto } from './dto/find-pending-documents.dto';

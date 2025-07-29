@@ -1,4 +1,3 @@
-// src/document-types/entities/document-type.entity.ts
 import { Document } from '../../documents/entities/document.entity';
 import {
   Column,

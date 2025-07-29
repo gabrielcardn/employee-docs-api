@@ -1,4 +1,3 @@
-// src/documents/entities/document.entity.ts
 import { Employee } from '../../employees/entities/employee.entity';
 import { DocumentType } from '../../document-types/entities/document-type.entity';
 import {
@@ -14,8 +13,6 @@ import {
 export enum DocumentStatus {
   PENDING = 'PENDING',
   SUBMITTED = 'SUBMITTED',
-  APPROVED = 'APPROVED',
-  REJECTED = 'REJECTED',
 }
 
 @Entity()

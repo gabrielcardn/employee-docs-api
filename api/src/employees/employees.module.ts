@@ -1,4 +1,3 @@
-// src/employees/employees.module.ts
 import { Module } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
 import { EmployeesController } from './employees.controller';
@@ -7,7 +6,7 @@ import { Employee } from './entities/employee.entity';
 import { Document } from '../documents/entities/document.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Employee, Document])], // <-- Garanta que esta linha exista
+  imports: [TypeOrmModule.forFeature([Employee, Document])],
   controllers: [EmployeesController],
   providers: [EmployeesService],
 })

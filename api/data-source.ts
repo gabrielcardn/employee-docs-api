@@ -1,4 +1,3 @@
-// data-source.ts
 import 'dotenv/config';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
@@ -9,9 +8,9 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USERNAME || 'root',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_DATABASE || 'inmeta_docs_db',
-  entities: ['src/**/*.entity.ts'], // <-- APONTAR PARA .ts
-  migrations: ['src/database/migrations/*.ts'], // <-- APONTAR PARA .ts
-  migrationsTableName: 'migrations', // Boa prática: nome explícito da tabela
+  entities: ['src/**/*.entity.ts'], 
+  migrations: ['src/database/migrations/*.ts'], 
+  migrationsTableName: 'migrations',
 };
 
 const dataSource = new DataSource(dataSourceOptions);

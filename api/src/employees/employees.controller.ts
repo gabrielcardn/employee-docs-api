@@ -1,4 +1,3 @@
-// src/employees/employees.controller.ts
 import {
   Controller,
   Get,
@@ -8,8 +7,8 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
-  HttpCode, // Importe o HttpCode
-  HttpStatus, // Importe o HttpStatus
+  HttpCode,
+  HttpStatus, 
 } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
@@ -25,9 +24,8 @@ export class EmployeesController {
     return this.employeesService.create(createEmployeeDto);
   }
 
-  // A ROTA PROBLEMÁTICA É ESTA AQUI:
   @Post(':id/documents')
-  @HttpCode(HttpStatus.NO_CONTENT) // Retorna 204 em vez de 201, mais apropriado para esta ação
+  @HttpCode(HttpStatus.NO_CONTENT)
   linkDocuments(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() linkDocumentsDto: LinkDocumentsDto,
@@ -40,8 +38,6 @@ export class EmployeesController {
     return this.employeesService.findAll();
   }
 
-  // ATENÇÃO: Coloque esta rota ANTES de @Get(':id') para evitar conflito de matching.
-  // O NestJS lê as rotas de cima para baixo.
   @Get(':id/documentation')
   getDocumentationStatus(@Param('id', ParseUUIDPipe) id: string) {
     return this.employeesService.getDocumentationStatus(id);

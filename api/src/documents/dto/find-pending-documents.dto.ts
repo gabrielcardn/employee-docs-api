@@ -1,4 +1,3 @@
-// src/documents/dto/find-pending-documents.dto.ts
 import { IsOptional, IsInt, Min, IsUUID } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -6,7 +5,7 @@ export class FindPendingDocumentsDto {
   @IsOptional()
   @IsInt()
   @Min(1)
-  @Type(() => Number) // Transforma o parâmetro da URL (string) em número
+  @Type(() => Number)
   page?: number = 1;
 
   @IsOptional()

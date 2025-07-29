@@ -1,4 +1,3 @@
-// src/document-types/document-types.controller.ts
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { DocumentTypesService } from './document-types.service';
 import { CreateDocumentTypeDto } from './dto/create-document-type.dto';
