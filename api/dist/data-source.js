@@ -10,8 +10,9 @@ exports.dataSourceOptions = {
     username: process.env.DB_USERNAME || 'root',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_DATABASE || 'inmeta_docs_db',
-    entities: ['dist/**/*.entity.js'],
-    migrations: ['dist/database/migrations/*.js'],
+    entities: ['src/**/*.entity.ts'],
+    migrations: ['src/database/migrations/*.ts'],
+    migrationsTableName: 'migrations',
 };
 const dataSource = new typeorm_1.DataSource(exports.dataSourceOptions);
 exports.default = dataSource;

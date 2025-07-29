@@ -10,13 +10,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-// Vamos criar um Enum para o status, o que é uma prática muito melhor
-// do que usar strings soltas. Isso garante consistência.
+// O Enum de status que define os estados possíveis de um documento.
 export enum DocumentStatus {
   PENDING = 'PENDING',
   SUBMITTED = 'SUBMITTED',
-  APPROVED = 'APPROVED', // Extra: pode ser útil no futuro
-  REJECTED = 'REJECTED', // Extra: pode ser útil no futuro
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
 }
 
 @Entity()
@@ -25,26 +24,23 @@ export class Document {
   id: string;
 
   // Relação: Muitos 'Documents' pertencem a Um 'Employee'.
-  // A coluna 'employeeId' será criada automaticamente no banco.
   @ManyToOne(() => Employee, (employee) => employee.documents, {
-    onDelete: 'CASCADE', // Se o colaborador for deletado, seus documentos também são.
+    onDelete: 'CASCADE', // Se o colaborador for deletado, seus registros de documento também são.
   })
   employee: Employee;
 
   // Relação: Muitos 'Documents' são de Um 'DocumentType'.
-  // A coluna 'documentTypeId' será criada automaticamente.
   @ManyToOne(() => DocumentType, (documentType) => documentType.documents)
   documentType: DocumentType;
 
   @Column({
     type: 'enum',
     enum: DocumentStatus,
-    default: DocumentStatus.PENDING, // Todo documento já nasce como pendente.
+    default: DocumentStatus.PENDING, // Todo novo vínculo já nasce como pendente.
   })
   status: DocumentStatus;
 
-  // Opcional: um campo para armazenar o caminho do arquivo, caso um dia
-  // a aplicação precise de upload de verdade. Por agora, pode ser nulo.
+  // Campo opcional para o futuro.
   @Column({ type: 'varchar', nullable: true })
   filePath: string;
 

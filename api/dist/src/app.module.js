@@ -13,6 +13,9 @@ const typeorm_1 = require("@nestjs/typeorm");
 const employee_entity_1 = require("./employees/entities/employee.entity");
 const document_type_entity_1 = require("./document-types/entities/document-type.entity");
 const document_entity_1 = require("./documents/entities/document.entity");
+const document_types_module_1 = require("./document-types/document-types.module");
+const employees_module_1 = require("./employees/employees.module");
+const documents_module_1 = require("./documents/documents.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -36,6 +39,9 @@ exports.AppModule = AppModule = __decorate([
                     synchronize: false,
                 }),
             }),
+            document_types_module_1.DocumentTypesModule,
+            employees_module_1.EmployeesModule,
+            documents_module_1.DocumentsModule,
         ],
         controllers: [],
         providers: [],

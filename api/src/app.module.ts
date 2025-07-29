@@ -5,6 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Employee } from './employees/entities/employee.entity';
 import { DocumentType } from './document-types/entities/document-type.entity';
 import { Document } from './documents/entities/document.entity';
+import { DocumentTypesModule } from './document-types/document-types.module';
+import { EmployeesModule } from './employees/employees.module';
+import { DocumentsModule } from './documents/documents.module';
 
 @Module({
   imports: [
@@ -25,6 +28,9 @@ import { Document } from './documents/entities/document.entity';
         synchronize: false,
       }),
     }),
+    DocumentTypesModule,
+    EmployeesModule,
+    DocumentsModule,
   ],
   controllers: [],
   providers: [],
