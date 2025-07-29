@@ -46,28 +46,36 @@ Instalação e Configuração
 Siga os passos abaixo para configurar e executar o projeto localmente. Todos os comandos devem ser executados a partir da pasta raiz do projeto.
 
 1. Clone o repositório:
+
    ```git clone https://github.com/gabrielcardn/employee-docs-api.git```
 
-2. Acesse a pasta do projeto:
+3. Acesse a pasta do projeto:
+
    ```cd employee-docs-api```
 
-3. Inicie o banco de dados:
+5. Inicie o banco de dados:
    Este comando irá iniciar um contêiner Docker com o banco de dados MySQL em segundo plano.
+
    ```docker-compose up -d```
 
-4. Instale as dependências da API:
+7. Instale as dependências da API:
    Navegue até a pasta da API e instale os pacotes necessários.
+
    ```cd api```
+
    ```npm install```
 
-5. Configure as variáveis de ambiente:
+9. Configure as variáveis de ambiente:
    Existe um arquivo de exemplo chamado '.env.example'. Crie uma cópia dele com o nome '.env'.
+
    ```cp .env.example .env```
+
    (Os valores padrão já estão configurados para o banco de dados Docker.)
 
-6. Execute as migrações do banco de dados:
+11. Execute as migrações do banco de dados:
    Este comando criará todas as tabelas necessárias.
-   ```npm run migration:run```
+
+```npm run migration:run```
 
 
 --------------------
