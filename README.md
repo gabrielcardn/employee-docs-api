@@ -1,3 +1,4 @@
+======================================
  API DE GERENCIAMENTO DE DOCUMENTOS
 ======================================
 
@@ -19,10 +20,22 @@ Funcionalidades Principais
 
 
 --------------------
+Qualidade e Robustez
+--------------------
+
+Além das funcionalidades principais, o projeto implementa práticas de engenharia para garantir maior qualidade e estabilidade:
+
+* Tratamento de Erros Global: Um filtro de exceção global foi implementado para padronizar todas as respostas de erro da API e para realizar o log detalhado de erros inesperados (erros 500), facilitando a depuração e manutenção.
+
+* Testes Unitários: Foram escritos testes unitários para o `DocumentsService` utilizando Jest, garantindo que a lógica de negócio crítica (envio e remoção de documentos) funcione como esperado e esteja protegida contra regressões.
+
+
+--------------------
 Tecnologias Utilizadas
 --------------------
 
 * Backend: Node.js, NestJS, TypeScript
+* Testes: Jest
 * ORM: TypeORM
 * Banco de Dados: MySQL
 * Conteinerização: Docker e Docker Compose
@@ -43,50 +56,58 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 Instalação e Configuração
 --------------------
 
-Siga os passos abaixo para configurar e executar o projeto localmente. Todos os comandos devem ser executados a partir da pasta raiz do projeto.
+Siga os passos abaixo para configurar e executar o projeto localmente.
 
 1. Clone o repositório:
-
+   
    ```git clone https://github.com/gabrielcardn/employee-docs-api.git```
 
-3. Acesse a pasta do projeto:
-
+2. Acesse a pasta do projeto:
+   
    ```cd employee-docs-api```
 
-5. Inicie o banco de dados:
+3. Inicie o banco de dados:
    Este comando irá iniciar um contêiner Docker com o banco de dados MySQL em segundo plano.
-
+   
    ```docker-compose up -d```
 
-7. Instale as dependências da API:
+4. Instale as dependências da API:
    Navegue até a pasta da API e instale os pacotes necessários.
 
    ```cd api```
 
    ```npm install```
 
-9. Configure as variáveis de ambiente:
+5. Configure as variáveis de ambiente:
    Existe um arquivo de exemplo chamado '.env.example'. Crie uma cópia dele com o nome '.env'.
 
    ```cp .env.example .env```
-
    (Os valores padrão já estão configurados para o banco de dados Docker.)
 
-11. Execute as migrações do banco de dados:
+6. Execute as migrações do banco de dados:
    Este comando criará todas as tabelas necessárias.
 
-```npm run migration:run```
+   ```npm run migration:run```
 
 
 --------------------
 Executando a Aplicação
 --------------------
 
-Com a configuração concluída, inicie o servidor de desenvolvimento.
+Com a configuração concluída, inicie o servidor de desenvolvimento. O servidor reiniciará automaticamente a cada alteração nos arquivos.
 
    ```npm run start:dev```
 
 A API estará disponível no endereço: http://localhost:3000
+
+
+--------------------
+Executando os Testes
+--------------------
+
+Para rodar a suíte de testes unitários, execute o seguinte comando na pasta `api`:
+
+   ```npm run test```
 
 
 --------------------

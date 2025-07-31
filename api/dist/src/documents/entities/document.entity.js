@@ -17,8 +17,6 @@ var DocumentStatus;
 (function (DocumentStatus) {
     DocumentStatus["PENDING"] = "PENDING";
     DocumentStatus["SUBMITTED"] = "SUBMITTED";
-    DocumentStatus["APPROVED"] = "APPROVED";
-    DocumentStatus["REJECTED"] = "REJECTED";
 })(DocumentStatus || (exports.DocumentStatus = DocumentStatus = {}));
 let Document = class Document {
     id;
