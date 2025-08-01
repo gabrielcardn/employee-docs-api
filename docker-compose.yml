@@ -1,35 +1,15 @@
-# Versão do docker-compose
-version: '3.8'
-
-# Definição dos nossos serviços (containers)
 services:
-  # Nome do nosso serviço de banco de dados
   mysql_db:
-    # Imagem que vamos usar do Docker Hub
     image: mysql:8.0
-
-    # Nome do container quando for criado
     container_name: inmeta-mysql-db
-
-    # Reinicia o container automaticamente em caso de falha
     restart: always
-
-    # Variáveis de ambiente para configurar o MySQL
     environment:
-      MYSQL_ROOT_PASSWORD: 'root_password_123' # <-- TROQUE POR UMA SENHA FORTE
+      MYSQL_ROOT_PASSWORD: 'root_password_123' 
       MYSQL_DATABASE: 'inmeta_docs_db'
-
-    # Mapeamento de portas: PortaDoSeuPC:PortaDoContainer
-    # Isso permite que sua aplicação NestJS (rodando no seu PC/WSL)
-    # acesse o banco de dados (rodando no container)
     ports:
       - "3306:3306"
-
-    # Volumes para persistir os dados do banco
-    # Sem isso, ao remover o container, você perderia todos os dados.
     volumes:
       - inmeta-mysql-data:/var/lib/mysql
 
-# Definição dos volumes nomeados
 volumes:
   inmeta-mysql-data:

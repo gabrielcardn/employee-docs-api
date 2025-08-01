@@ -9,7 +9,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-// O Enum de status que define os estados possíveis de um documento.
 export enum DocumentStatus {
   PENDING = 'PENDING',
   SUBMITTED = 'SUBMITTED',
@@ -20,24 +19,21 @@ export class Document {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  // Relação: Muitos 'Documents' pertencem a Um 'Employee'.
   @ManyToOne(() => Employee, (employee) => employee.documents, {
-    onDelete: 'CASCADE', // Se o colaborador for deletado, seus registros de documento também são.
+    onDelete: 'CASCADE', 
   })
   employee: Employee;
 
-  // Relação: Muitos 'Documents' são de Um 'DocumentType'.
   @ManyToOne(() => DocumentType, (documentType) => documentType.documents)
   documentType: DocumentType;
 
   @Column({
     type: 'enum',
     enum: DocumentStatus,
-    default: DocumentStatus.PENDING, // Todo novo vínculo já nasce como pendente.
+    default: DocumentStatus.PENDING, 
   })
   status: DocumentStatus;
 
-  // Campo opcional para o futuro.
   @Column({ type: 'varchar', nullable: true })
   filePath: string;
 

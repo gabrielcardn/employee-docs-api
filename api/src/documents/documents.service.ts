@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Document, DocumentStatus } from './entities/document.entity';
@@ -16,11 +20,10 @@ export class DocumentsService {
 
     const query = this.documentRepository
       .createQueryBuilder('document')
-      .leftJoinAndSelect('document.employee', 'employee') 
-      .leftJoinAndSelect('document.documentType', 'documentType') 
+      .leftJoinAndSelect('document.employee', 'employee')
+      .leftJoinAndSelect('document.documentType', 'documentType')
       .where('document.status = :status', { status: DocumentStatus.PENDING });
 
-    // Adiciona filtros se eles forem fornecidos
     if (employeeId) {
       query.andWhere('employee.id = :employeeId', { employeeId });
     }
@@ -29,7 +32,6 @@ export class DocumentsService {
       query.andWhere('documentType.id = :documentTypeId', { documentTypeId });
     }
 
-    // Aplica a paginação
     query.skip((page - 1) * limit).take(limit);
 
     const [data, total] = await query.getManyAndCount();
@@ -49,7 +51,6 @@ export class DocumentsService {
       throw new NotFoundException(`Document with ID "${id}" not found`);
     }
 
-    // Opcional: lógica para não submeter um documento que não está pendente
     if (document.status !== DocumentStatus.PENDING) {
       throw new ConflictException(`Document is not pending.`);
     }

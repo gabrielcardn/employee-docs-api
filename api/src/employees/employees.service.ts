@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee } from './entities/employee.entity';
-import { Document } from '../documents/entities/document.entity'; 
+import { Document } from '../documents/entities/document.entity';
 import { LinkDocumentsDto } from './dto/link-documents.dto';
 
 @Injectable()
@@ -34,7 +34,10 @@ export class EmployeesService {
     return employee;
   }
 
-  async update(id: string, updateEmployeeDto: UpdateEmployeeDto): Promise<Employee> {
+  async update(
+    id: string,
+    updateEmployeeDto: UpdateEmployeeDto,
+  ): Promise<Employee> {
     const employee = await this.employeeRepository.preload({
       id: id,
       ...updateEmployeeDto,
@@ -53,32 +56,30 @@ export class EmployeesService {
     }
   }
 
-    async linkDocuments(employeeId: string, linkDocumentsDto: LinkDocumentsDto): Promise<void> {
-    // 1. Verifica se o colaborador existe
-    const employee = await this.findOne(employeeId); 
+  async linkDocuments(
+    employeeId: string,
+    linkDocumentsDto: LinkDocumentsDto,
+  ): Promise<void> {
+    const employee = await this.findOne(employeeId);
 
     const { documentTypeIds } = linkDocumentsDto;
 
-    // 2. Cria uma lista de novas instâncias de Document
     const documentsToCreate = documentTypeIds.map((typeId) => {
       return this.documentRepository.create({
-        employee: employee, // Associa ao colaborador encontrado
-        documentType: { id: typeId }, // Associa ao tipo de documento pelo ID
+        employee: employee,
+        documentType: { id: typeId },
       });
     });
 
-    // 3. Salva todos os novos documentos no banco de uma vez
     await this.documentRepository.save(documentsToCreate);
   }
 
   async getDocumentationStatus(id: string): Promise<Employee> {
-    // Usamos a opção 'relations' para dizer ao TypeORM para carregar
-    // as entidades relacionadas 'documents' e 'documents.documentType'.
     const employee = await this.employeeRepository.findOne({
       where: { id },
       relations: {
         documents: {
-          documentType: true, // Isso faz um JOIN para trazer os dados do tipo de documento
+          documentType: true,
         },
       },
     });
