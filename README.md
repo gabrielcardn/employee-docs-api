@@ -29,12 +29,15 @@ Além das funcionalidades principais, o projeto implementa práticas de engenhar
 
 * Testes Unitários: Foram escritos testes unitários para o `DocumentsService` utilizando Jest, garantindo que a lógica de negócio crítica (envio e remoção de documentos) funcione como esperado e esteja protegida contra regressões.
 
+* Documentação Interativa (Swagger): A API é autodocumentada usando a especificação OpenAPI (Swagger). Isso gera uma interface web interativa para explorar e testar os endpoints em tempo real.
+
 
 --------------------
 Tecnologias Utilizadas
 --------------------
 
 * Backend: Node.js, NestJS, TypeScript
+* Documentação: Swagger (OpenAPI)
 * Testes: Jest
 * ORM: TypeORM
 * Banco de Dados: MySQL
@@ -73,20 +76,20 @@ Siga os passos abaixo para configurar e executar o projeto localmente.
 
 4. Instale as dependências da API:
    Navegue até a pasta da API e instale os pacotes necessários.
-
+   
    ```cd api```
-
+   
    ```npm install```
 
 5. Configure as variáveis de ambiente:
    Existe um arquivo de exemplo chamado '.env.example'. Crie uma cópia dele com o nome '.env'.
-
+   
    ```cp .env.example .env```
    (Os valores padrão já estão configurados para o banco de dados Docker.)
 
 6. Execute as migrações do banco de dados:
    Este comando criará todas as tabelas necessárias.
-
+   
    ```npm run migration:run```
 
 
@@ -102,6 +105,17 @@ A API estará disponível no endereço: http://localhost:3000
 
 
 --------------------
+Documentação da API (Swagger)
+--------------------
+
+Com a aplicação em execução, a documentação interativa da API pode ser acessada no seu navegador através do seguinte endereço:
+
+   http://localhost:3000/api-docs
+
+Nesta página, você pode visualizar todos os endpoints, seus parâmetros, schemas de resposta e executar requisições de teste diretamente pela interface.
+
+
+--------------------
 Executando os Testes
 --------------------
 
@@ -114,7 +128,7 @@ Para rodar a suíte de testes unitários, execute o seguinte comando na pasta `a
 Endpoints da API
 --------------------
 
-Abaixo estão os principais endpoints disponíveis.
+Abaixo estão os principais endpoints disponíveis, que também podem ser explorados em detalhe através da documentação do Swagger.
 
 * Documentos:
   - GET /documents/pending -> Lista documentos pendentes (com filtros opcionais ?page, ?limit, ?employeeId, ?documentTypeId)
